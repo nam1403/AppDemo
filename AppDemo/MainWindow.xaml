@@ -3,20 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AppDemo"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        Title="MainWindow" Height="450" Width="800">
-    <Border BorderThickness="2" CornerRadius="10">
+        Title="MainWindow" Height="700" Width="1000">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border>
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#FF973131" Offset="0"/>
-                <GradientStop Color="#FF2397B9" Offset="0"/>
+                <GradientStop Color="{StaticResource winBorderColor4}" Offset="0.5"/>
                 <GradientStop Color="#FF9A3BB6" Offset="1"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
+
+        <materialDesign:DrawerHost>
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel Margin="16">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                              Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                              CommandParameter="{x:Static Dock.Left}" Content="{materialDesign:PackIcon Kind=ArrowLeft}" Margin="0,0,0,40" HorizontalAlignment="Right" Foreground="#FFEBE5F5" />
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" Foreground="#FFEBE5F5" Margin="0,0,10,0" />
+                        <TextBlock Text="Trang chu" FontSize="20" Foreground="#FFEBE5F5" />
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" >
+                    <materialDesign:ColorZone Padding="16" Mode="PrimaryMid">
+                        <DockPanel>
+                            <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
+                                <ListBox>
+                                    <ListBoxItem Content="Tài khoản" />
+                                    <ListBoxItem Content="Cài đặt" />
+                                    <ListBoxItem Content="Thoát" />
+                                </ListBox>
+                            </materialDesign:PopupBox>
+
+                            <materialDesign:Chip DockPanel.Dock="Right" Content="Nguyễn Đắc Nam" FontFamily="Book Antiqua">
+                                <materialDesign:Chip.Icon>
+                                    <Image Source="/Images/anh-dep-chat-001.jpg" Stretch="Fill" />
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
+
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                              Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                                              CommandParameter="{x:Static Dock.Left}" Content="{materialDesign:PackIcon Kind=ArrowLeft}" />
+                            </StackPanel>
+                        </DockPanel>
+                    </materialDesign:ColorZone>
+                </Grid>
+
+                <Grid Grid.Row="1" Background="#FF452E47">
+
+
+                </Grid>
+            </Grid>
+        </materialDesign:DrawerHost>
+
     </Border>
 </Window>
